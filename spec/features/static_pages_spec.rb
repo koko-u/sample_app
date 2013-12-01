@@ -10,7 +10,11 @@ describe "StaticPages" do
     it "Sample App と表示される" do
       expect(page).to have_content('Sample App')
     end
-  end
+
+    it "適切なタイトルが表示される" do
+      expect(page).to have_title(/Home/)
+    end
+end
 
   describe "Help Page" do
     before do
@@ -18,6 +22,10 @@ describe "StaticPages" do
     end
     it "Help と表示される" do
       expect(page).to have_content('Help')
+    end
+
+    it "適切なタイトルが表示される" do
+      expect(page).to have_title(/Help/)
     end
   end
 
@@ -28,5 +36,10 @@ describe "StaticPages" do
     it "About Us と表示される" do
       expect(page).to have_content('About Us')
     end
+
+    it "適切なタイトルが表示される" do
+      expect(page).to have_title(/About Us/)
+    end
   end
+
 end
