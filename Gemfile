@@ -61,6 +61,7 @@ group :development, :test do
   gem "spring-commands-rspec"
   gem "database_cleaner"
   gem "awesome_print"
+  gem "tapp"
 end
 
 group :production do
