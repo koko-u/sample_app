@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-
+  let(:base_title) { 'Ruby on Rails Tutorial' }
   describe "Home Page" do
     before do
       visit '/static_pages/home'
@@ -11,8 +11,12 @@ describe "StaticPages" do
       expect(page).to have_content('Sample App')
     end
 
-    it "適切なタイトルが表示される" do
-      expect(page).to have_title(/Home/)
+    it "タイトルが表示される" do
+      expect(page).to have_title(base_title)
+    end
+
+    it "Home とは表示されない" do
+      expect(page).not_to have_title('Home')
     end
 end
 
