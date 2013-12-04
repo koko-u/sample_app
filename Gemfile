@@ -46,6 +46,10 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem "i18n_generators"
+
+# twitter bootstrap
+gem "bootstrap-sass", '~> 2.3.2'
+
 group :development, :test do
   gem "factory_girl_rails"
   gem "rspec-rails"

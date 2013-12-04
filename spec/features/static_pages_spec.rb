@@ -4,46 +4,45 @@ require 'spec_helper'
 describe "StaticPages" do
   let(:base_title) { 'Ruby on Rails Tutorial' }
   describe "Home Page" do
+    subject { page }
     before do
-      visit '/static_pages/home'
-    end
-    it "Sample App と表示される" do
-      expect(page).to have_content('Sample App')
+      visit root_path
     end
 
-    it "タイトルが表示される" do
-      expect(page).to have_title(base_title)
-    end
-
-    it "Home とは表示されない" do
-      expect(page).not_to have_title('Home')
-    end
+    it { should     have_content('Sample App') }
+    it { should     have_title(base_title) }
+    it { should_not have_title('Home') }
 end
 
   describe "Help Page" do
+    subject { page }
     before do
-      visit '/static_pages/help'
-    end
-    it "Help と表示される" do
-      expect(page).to have_content('Help')
+      visit help_path
     end
 
-    it "適切なタイトルが表示される" do
-      expect(page).to have_title(/Help/)
-    end
+    it { should have_content('Help') }
+    it { should have_title(/Help/) }
+
   end
 
   describe "About Page" do
+    subject { page }
     before do
-      visit '/static_pages/about'
-    end
-    it "About Us と表示される" do
-      expect(page).to have_content('About Us')
+      visit about_path
     end
 
-    it "適切なタイトルが表示される" do
-      expect(page).to have_title(/About Us/)
+    it { should have_content('About Us') }
+    it { should have_title(/About Us/) }
+  end
+
+  describe "Contact Page" do
+    subject { page }
+    before do
+      visit contact_path
     end
+
+    it { should have_content('Contact') }
+    it { should have_title(/Contact/) }
   end
 
 end

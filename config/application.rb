@@ -11,11 +11,14 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+# asset pipeline for bootstrap
+require File.expand_path('../boot', __FILE__)
+
 module SampleApp
   class Application < Rails::Application
     config.generators do |g|
-  g.view_specs false
-end
+      g.view_specs false
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -28,5 +31,7 @@ end
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = 'ja'
+
+    config.assets.precompile += %w(*.png *.jpg *jpeg *.gif)
   end
 end
