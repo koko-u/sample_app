@@ -1,48 +1,69 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
 
-describe "StaticPages" do
-  let(:base_title) { 'Ruby on Rails Tutorial' }
-  describe "Home Page" do
-    subject { page }
-    before do
-      visit root_path
-    end
-
-    it { should     have_content('Sample App') }
-    it { should     have_title(base_title) }
-    it { should_not have_title('Home') }
+shared_examples "desired page with" do |params|
+  it { should have_content(params[:heading]) }
+  it { should have_title(params[:title]) }
 end
 
+describe "StaticPages" do
+  subject { page }
+
+  describe "Home Page" do
+    before { visit root_path }
+
+    it_behaves_like "desired page with", heading: 'Sample App', title: 'Ruby on Rails Tutorial'
+    it { should_not have_title('Home') }
+  end
+
   describe "Help Page" do
-    subject { page }
-    before do
-      visit help_path
-    end
+    before { visit help_path }
 
-    it { should have_content('Help') }
-    it { should have_title(/Help/) }
-
+    it_behaves_like "desired page with", heading: 'Help', title: 'Help'
   end
 
   describe "About Page" do
-    subject { page }
-    before do
-      visit about_path
-    end
+    before { visit about_path }
 
-    it { should have_content('About Us') }
-    it { should have_title(/About Us/) }
+    it_behaves_like "desired page with", heading: 'About Us', title: 'About Us'
   end
 
   describe "Contact Page" do
-    subject { page }
-    before do
-      visit contact_path
-    end
+    before { visit contact_path }
 
-    it { should have_content('Contact') }
-    it { should have_title(/Contact/) }
+    it_behaves_like "desired page with", heading: 'Contact', title: 'Contact'
   end
 
+end
+
+describe "Page Transit" do
+  subject { page }
+  context "At Home Page" do
+    before { visit root_path }
+
+    context "Click Help Link" do
+      before { click_link "Help" }
+      it { should have_title('Help') }
+    end
+
+    context "Click About Link" do
+      before { click_link "About" }
+      it { should have_title('About Us') }
+    end
+
+    context "Click Contact Link" do
+      before { click_link "Contact" }
+      it { should have_title('Contact') }
+    end
+
+    context "Click Home Link" do
+      before { click_link "Home" }
+      it { should have_content('Welcome') }
+    end
+
+    context "Click Signup Button" do
+      before { click_link "Sign up now!" }
+      it { should have_title('Sign up') }
+    end
+  end
 end
