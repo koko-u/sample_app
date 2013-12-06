@@ -72,3 +72,8 @@ group :production do
   gem "pg"
   gem "rails_12factor"
 end
+
+# workaround for rbenv + ruby-2.0.0
+group :development, :test do
+  gem 'rb-readline', require: false
+end
