@@ -44,6 +44,9 @@ describe "User pages" do
       it "ウェルカムメッセージが表示される" do
         expect(page).to have_content("Welcome to the Sample App!")
       end
+      it "サインアウトのリンクが表示される" do
+        expect(page).to have_link('Sign out')
+      end
     end
   end
 

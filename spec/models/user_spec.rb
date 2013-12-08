@@ -9,6 +9,7 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
 
   context "名前とe-mailを持つ場合" do
     it { should be_valid }
@@ -124,5 +125,11 @@ describe User do
     subject { FactoryGirl.build(:user, password: short_passwd, password_confirmation: short_passwd) }
 
     it { should be_invalid }
+  end
+
+  context "記憶トークン" do
+    subject(:user) { FactoryGirl.build(:user, remember_token: nil) }
+    before { user.save }
+    its(:remember_token) { should be_present }
   end
 end
